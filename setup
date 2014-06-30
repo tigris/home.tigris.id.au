@@ -1,0 +1,71 @@
+#!/bin/bash
+set -e
+
+PACKAGES=""
+DAEMONS=""
+
+# Apt
+
+## Custom sources
+
+    if ! diff -q config/apt/sources.list /etc/apt/sources.list > /dev/null; then
+      sudo cp config/apt/sources.list /etc/apt/sources.list
+      sudo apt-get update -qq
+    fi
+
+## General
+
+    function packages {
+      for pkg in $1; do
+        if ! dpkg -s $pkg > /dev/null; then
+          sudo apt-get install -qqy $pkg
+          $PACKAGES="$PACKAGES $pkg"
+        fi
+      done
+    }
+
+    packages "git vim"
+
+## Used for my super awesome aac2ac3 script
+
+    packages "aften faad mediainfo mkvtoolnix"
+
+## Used for merging avi files
+
+    packages "mencoder"
+
+# Samba
+
+    packages "samba"
+
+    if ! diff -q config/samba/smb.conf /etc/samba/smb.conf > /dev/null; then
+      sudo cp config/samba/smb.conf /etc/samba/smb.conf
+      sudo service samba stop > /dev/null
+      sudo service samba start > /dev/null
+      $DAEMONS="$DAEMONS samba"
+    fi
+
+# Mail
+
+    packages "exim4"
+
+    if ! diff -q config/exim4/exim4.conf /etc/exim4/update-exim4.conf.conf > /dev/null; then
+      sudo cp config/exim4/exim4.conf /etc/exim4/update-exim4.conf.conf
+      sudo update-exim4.conf
+      sudo service exim4 stop > /dev/null
+      sudo service exim4 start > /dev/null
+      $DAEMONS="$DAEMONS exim4"
+    fi
+
+# DHCP
+
+
+
+# DNS
+
+
+
+echo -e "The following packages (and dependencies) were installed:\n    ${PACKAGES:-none}"
+echo -e "The following daemons were stopped and started:\n    ${DAEMONS:-none}"
+
+exit 0;
