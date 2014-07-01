@@ -38,7 +38,7 @@ DAEMONS=""
 # Cron
 
     if ! diff -q config/cron/home_tigris_id_au /etc/cron.d/home_tigris_id_au > /dev/null; then
-      sudo cp config/cron/home_tigris_id_au /etc/home_tigris_id_au
+      sudo cp config/cron/home_tigris_id_au /etc/cron.d/home_tigris_id_au
       sudo service cron reload > /dev/null
       DAEMONS="$DAEMONS cron"
     fi
