@@ -52,20 +52,69 @@ DAEMONS=""
     if ! diff -q config/exim4/exim4.conf /etc/exim4/update-exim4.conf.conf > /dev/null; then
       sudo cp config/exim4/exim4.conf /etc/exim4/update-exim4.conf.conf
       sudo update-exim4.conf
-      sudo service exim4 stop > /dev/null
-      sudo service exim4 start > /dev/null
+      sudo service exim4 restart > /dev/null
       $DAEMONS="$DAEMONS exim4"
     fi
 
-# DHCP
+# Networking
 
+## General
 
+    NETWORKING_CHANGED="0"
 
-# DNS
+    if ! diff -q config/network/hosts /etc/hosts > /dev/null; then
+      sudo cp config/network/hosts /etc/hosts
+      $NETWORKING_CHANGED="1"
+    fi
 
+    if ! diff -q config/network/resolv.conf /etc/resolv.conf > /dev/null; then
+      sudo cp config/network/resolv.conf /etc/resolv.conf
+      $NETWORKING_CHANGED="1"
+    fi
 
+    if ! diff -q config/network/interfaces /etc/network/interfaces > /dev/null; then
+      sudo cp config/network/interfaces /etc/network/interfaces
+      $NETWORKING_CHANGED="1"
+    fi
+
+    if [ "x${NETWORKING_CHANGED}" == "x1" ]; then
+      sudo service networking restart > /dev/null
+      $DAEMONS="$DAEMONS networking"
+    fi
+
+## DNS
+
+    DNS_CHANGED="0"
+
+    packages "bind9"
+
+    for file in "named.conf.local named.conf.options zone.home.tigris.id.au zone.1.168.192.in-addr.arpa"; do
+      if ! diff -q config/dns/${file} /etc/bind/${file} > /dev/null; then
+        sudo cp config/dns/${file} /etc/bind/${file}
+        $DNS_CHANGED="1"
+      fi
+    done
+
+    if [ "x${DNS_CHANGED}" == "x1" ]; then
+      sudo service bind9 restart > /dev/null
+      $DAEMONS="$DAEMONS bind9"
+    fi
+
+## DHCP
+
+    packages "isc-dhcp-server"
+
+    if ! diff -q config/dhcp/default.conf /etc/default/isc-dhcp-server > /dev/null; then
+      sudo cp config/dhcp/default.conf /etc/default/isc-dhcp-server
+    fi
+
+    if ! diff -q config/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf > /dev/null; then
+      sudo cp config/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
+      sudo service isc-dhcp-server restart > /dev/null
+      $DAEMONS="$DAEMONS isc-dhcp-server"
+    fi
 
 echo -e "The following packages (and dependencies) were installed:\n    ${PACKAGES:-none}"
-echo -e "The following daemons were stopped and started:\n    ${DAEMONS:-none}"
+echo -e "The following daemons were restarted (or stopped and started):\n    ${DAEMONS:-none}"
 
-exit 0;
+exit 0

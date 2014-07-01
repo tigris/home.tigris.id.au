@@ -1,0 +1,9 @@
+zone "home.tigris.id.au" {
+  type master;
+  file "/etc/bind/zone.home.tigris.id.au";
+};
+
+zone "1.168.192.in-addr.arpa" {
+  type master;
+  file "/etc/bind/zone.1.168.192.in-addr.arpa";
+};
