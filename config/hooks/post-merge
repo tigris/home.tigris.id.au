@@ -28,7 +28,7 @@ EOM
 }
 
 cd $home/$app
-setup=$(./setup)
+setup_output=$(./setup)
 
 git tag $new_tag
 print_changelog | mail -s "Restarted $app" $mailto
