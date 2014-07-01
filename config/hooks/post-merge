@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+
+home="/srv"
+app="home.tigris.id.au"
+mailto="danial"
+
+new_tag=RELEASE-$(date +%Y%m%dT%H%M%S)
+old_tag=$(git tag -l RELEASE* | sort -r | head -n1)
+old_tag=${old_tag:-"HEAD^"}
+
+setup_output=""
+
+function print_changelog {
+  cat<<EOM
+
+Hi,
+
+$app has been updated with the following changes
+
+${setup_output}
+
+====================================================
+
+$(git log --stat --no-color $old_tag..HEAD)
+
+EOM
+}
+
+cd $home/$app
+setup=$(./setup)
+
+git tag $new_tag
+print_changelog | mail -s "Restarted $app" $mailto
