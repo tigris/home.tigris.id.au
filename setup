@@ -91,7 +91,7 @@ DAEMONS=""
 
     packages "bind9"
 
-    for file in "named.conf.local named.conf.options zone.home.tigris.id.au zone.1.168.192.in-addr.arpa"; do
+    for file in named.conf.local named.conf.options zone.home.tigris.id.au zone.1.168.192.in-addr.arpa; do
       if ! diff -q config/dns/${file} /etc/bind/${file} > /dev/null; then
         sudo cp config/dns/${file} /etc/bind/${file}
         DNS_CHANGED="1"
