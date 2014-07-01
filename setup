@@ -21,7 +21,7 @@ DAEMONS=""
       for pkg in $1; do
         if ! dpkg -s $pkg > /dev/null; then
           sudo -E apt-get install -qqy $pkg > /dev/null
-          $PACKAGES="$PACKAGES $pkg"
+          PACKAGES="$PACKAGES $pkg"
         fi
       done
     }
@@ -45,7 +45,7 @@ DAEMONS=""
       # Samba is stop/start because restart doesn't seem to go down well
       sudo service samba stop > /dev/null
       sudo service samba start > /dev/null
-      $DAEMONS="$DAEMONS samba"
+      DAEMONS="$DAEMONS samba"
     fi
 
 # Mail
@@ -56,7 +56,7 @@ DAEMONS=""
       sudo cp config/exim4/exim4.conf /etc/exim4/update-exim4.conf.conf
       sudo update-exim4.conf
       sudo service exim4 restart > /dev/null
-      $DAEMONS="$DAEMONS exim4"
+      DAEMONS="$DAEMONS exim4"
     fi
 
 # Networking
@@ -82,7 +82,7 @@ DAEMONS=""
 
     if [ "x${NETWORKING_CHANGED}" == "x1" ]; then
       sudo service networking restart > /dev/null
-      $DAEMONS="$DAEMONS networking"
+      DAEMONS="$DAEMONS networking"
     fi
 
 ## DNS
@@ -94,13 +94,13 @@ DAEMONS=""
     for file in "named.conf.local named.conf.options zone.home.tigris.id.au zone.1.168.192.in-addr.arpa"; do
       if ! diff -q config/dns/${file} /etc/bind/${file} > /dev/null; then
         sudo cp config/dns/${file} /etc/bind/${file}
-        $DNS_CHANGED="1"
+        DNS_CHANGED="1"
       fi
     done
 
     if [ "x${DNS_CHANGED}" == "x1" ]; then
       sudo service bind9 restart > /dev/null
-      $DAEMONS="$DAEMONS bind9"
+      DAEMONS="$DAEMONS bind9"
     fi
 
 ## DHCP
@@ -114,7 +114,7 @@ DAEMONS=""
     if ! diff -q config/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf > /dev/null; then
       sudo cp config/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
       sudo service isc-dhcp-server restart > /dev/null
-      $DAEMONS="$DAEMONS isc-dhcp-server"
+      DAEMONS="$DAEMONS isc-dhcp-server"
     fi
 
 ## Dynamic DNS
@@ -134,14 +134,14 @@ DAEMONS=""
 
     if ! sudo diff -q ~root/.tmp.ddclient.conf /etc/ddclient.conf > /dev/null; then
       sudo cp ~root/.tmp.ddclient.conf /etc/ddclient.conf
-      $DDNS_CHANGED="1"
+      DDNS_CHANGED="1"
     fi
 
     packages "ddclient"
 
     if [ "x${DDNS_CHANGED}" == "x1" ]; then
       sudo service ddclient restart > /dev/null
-      $DAEMONS="$DAEMONS ddclient"
+      DAEMONS="$DAEMONS ddclient"
     fi
 
 
