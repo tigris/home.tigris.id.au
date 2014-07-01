@@ -144,8 +144,14 @@ DAEMONS=""
       DAEMONS="$DAEMONS ddclient"
     fi
 
+# Auto Deploy
 
-echo -e "The following packages (and dependencies) were installed:\n    ${PACKAGES:-none}"
-echo -e "The following daemons were restarted (or stopped and started):\n    ${DAEMONS:-none}"
+    ln -sf /srv/home.tigris.id.au/config/hooks/post-merge /srv/home.tigris.id.au/.git/hooks/post-merge
 
-exit 0
+# Finish up
+
+    echo -e "The following packages (and dependencies) were installed:\n    ${PACKAGES:-none}"
+    echo -e "The following daemons were restarted (or stopped and started):\n    ${DAEMONS:-none}"
+
+    exit 0
+
