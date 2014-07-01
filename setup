@@ -67,17 +67,17 @@ DAEMONS=""
 
     if ! diff -q config/network/hosts /etc/hosts > /dev/null; then
       sudo cp config/network/hosts /etc/hosts
-      $NETWORKING_CHANGED="1"
+      NETWORKING_CHANGED="1"
     fi
 
     if ! diff -q config/network/resolv.conf /etc/resolv.conf > /dev/null; then
       sudo cp config/network/resolv.conf /etc/resolv.conf
-      $NETWORKING_CHANGED="1"
+      NETWORKING_CHANGED="1"
     fi
 
     if ! diff -q config/network/interfaces /etc/network/interfaces > /dev/null; then
       sudo cp config/network/interfaces /etc/network/interfaces
-      $NETWORKING_CHANGED="1"
+      NETWORKING_CHANGED="1"
     fi
 
     if [ "x${NETWORKING_CHANGED}" == "x1" ]; then
