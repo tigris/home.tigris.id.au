@@ -88,7 +88,10 @@ DAEMONS=""
     fi
 
     if [ "x${NETWORKING_CHANGED}" == "x1" ]; then
-      sudo service networking restart > /dev/null
+      # Networking restarts are pretty flakey :/
+      sudo service networking stop > /dev/null
+      sleep 2
+      sudo service networking start > /dev/null
       DAEMONS="${DAEMONS}networking "
     fi
 
