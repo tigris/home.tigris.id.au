@@ -2,7 +2,7 @@ $ORIGIN 1.168.192.in-addr.arpa.
 $TTL 1D
 
 @ IN SOA doc.home.tigris.id.au. hostmaster.tigris.id.au. (
-  201407013
+  201407051
   28800
   14400
   2419200
@@ -16,3 +16,11 @@ $TTL 1D
 3 PTR george.home.tigris.id.au.
 4 PTR marty.home.tigris.id.au.
 5 PTR einstein.home.tigris.id.au.
+6 PTR delorean.home.tigris.id.au.
+7 PTR lorraine.home.tigris.id.au.
+8 PTR griff.home.tigris.id.au.
+9 PTR emmett.home.tigris.id.au.
+10 PTR strickland.home.tigris.id.au.
+11 PTR clara.home.tigris.id.au.
+12 PTR needles.home.tigris.id.au.
+13 PTR jennifer.home.tigris.id.au.
