@@ -35,6 +35,10 @@ DAEMONS=""
 
     packages "mencoder"
 
+## Needed for backup scripts etc
+
+    packages "cifs-utils"
+
 # Cron
 
     if ! diff -q config/cron/home_tigris_id_au /etc/cron.d/home_tigris_id_au > /dev/null; then
