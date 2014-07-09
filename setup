@@ -47,16 +47,6 @@ DAEMONS=""
       DAEMONS="${DAEMONS}cron "
     fi
 
-# NFS
-
-    packages "nfs-kernel-server"
-
-    if ! diff -q config/nfs/exports /etc/exports > /dev/null; then
-      sudo cp config/dns/exports /etc/exports
-      sudo service nfs-kernel-server restart
-      DAEMONS="${DAEMONS}nfs-kernel-server "
-    fi
-
 # Samba
 
     packages "samba"
@@ -86,12 +76,10 @@ DAEMONS=""
 
     NETWORKING_CHANGED="0"
 
-    for file in hosts hosts.allow hosts.deny resolv.conf; do
-      if ! diff -q config/network/${file} /etc/${file} > /dev/null; then
-        sudo cp config/network/${file} /etc/${file}
-        NETWORKING_CHANGED="1"
-      fi
-    done
+    if ! diff -q config/network/hosts /etc/hosts > /dev/null; then
+      sudo cp config/network/hosts /etc/hosts
+      NETWORKING_CHANGED="1"
+    fi
 
     if ! diff -q config/network/interfaces /etc/network/interfaces > /dev/null; then
       sudo cp config/network/interfaces /etc/network/interfaces
