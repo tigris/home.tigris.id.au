@@ -1,0 +1,6 @@
+/home/danial   192.168.1.0/24(rw,insecure,no_subtree_check,async)
+/home/movies   192.168.1.0/24(rw,insecure,no_subtree_check,async)
+/home/music    192.168.1.0/24(rw,insecure,no_subtree_check,async)
+/home/software 192.168.1.0/24(rw,insecure,no_subtree_check,async)
+/home/torrents 192.168.1.0/24(rw,insecure,no_subtree_check,async)
+/home/tv       192.168.1.0/24(rw,insecure,no_subtree_check,async)
