@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [ -f /tmp/backup.delorean.sync ]; then
   echo "Backup still running!" 1>&2
