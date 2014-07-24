@@ -2,7 +2,7 @@
 
 sudo mkdir -p /backup/
 sudo mount -t cifs //$(host delorean.home.tigris.id.au | awk '{ print $4 }')/backup /backup -o username=admin,password=admin,uid=danial,gid=danial
-rsync --inplace --recursive --verbose --exclude 'nobackup' --delete --size-only --quiet /home/ /backup/
+rsync --inplace --recursive --exclude 'nobackup' --delete --size-only --quiet /home/ /backup/
 sudo umount /backup/
 
 exit 0
