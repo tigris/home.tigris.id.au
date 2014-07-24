@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f /tmp/backup.delorean.rsync ]; then
+if [ -f /tmp/backup.delorean.sync ]; then
   echo "Backup still running!" 1>&2
   exit 1
 fi
