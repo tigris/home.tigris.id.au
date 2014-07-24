@@ -1,8 +1,15 @@
 #!/bin/bash
 
+if [ -f /tmp/backup.delorean.rsync ]; then
+  echo "Backup still running!" 1>&2
+  exit 1
+fi
+
+touch /tmp/backup.delorean.sync
 sudo mkdir -p /backup/
 sudo mount -t cifs //$(host delorean.home.tigris.id.au | awk '{ print $4 }')/backup /backup -o username=admin,password=admin,uid=danial,gid=danial
 rsync --inplace --recursive --exclude 'nobackup' --delete --size-only --quiet /home/ /backup/
 sudo umount /backup/
+rm /tmp/backup.delorean.sync
 
 exit 0
