@@ -28,7 +28,7 @@ DAEMONS=""
       done
     }
 
-    packages "git vim smartmontools ack-grep command-not-found mdadm hddtemp xfsprogs"
+    packages "git vim smartmontools ack-grep command-not-found mdadm hddtemp xfsprogs parted"
 
 ## Used for my super awesome aac2ac3 script
 
