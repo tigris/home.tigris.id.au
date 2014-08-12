@@ -32,7 +32,7 @@ DAEMONS=""
 
 ## Used for my super awesome aac2ac3 script
 
-    packages "aften faad mediainfo mkvtoolnix"
+    packages "aften faad mediainfo mkvtoolnix ffmpeg"
 
 ## Used for merging avi files
 
