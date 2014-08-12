@@ -73,6 +73,13 @@ DAEMONS=""
       DAEMONS="${DAEMONS}exim4 "
     fi
 
+    if ! diff -q config/exim4/aliases /etc/aliases >/dev/null 2>/dev/null; then
+      sudo cp config/exim4/aliases /etc/aliases
+      sudo newaliases
+      sudo service exim4 restart > /dev/null
+      DAEMONS="${DAEMONS}exim4 "
+    fi
+
 # Networking
 
 ## General
