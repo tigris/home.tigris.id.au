@@ -1,5 +1,6 @@
 PATH="/usr/local/bin:/usr/bin:/bin"
 MAILTO="danial"
 
-*/5  *  *  *  * danial cd /srv/home.tigris.id.au && ./bin/git-pull
-30   *  *  *  * danial cd /srv/home.tigris.id.au && ./bin/backup
+*/5  *  *  *  * danial  cd /srv/home.tigris.id.au && ./bin/git-pull
+30   *  *  *  * danial  cd /srv/home.tigris.id.au && ./bin/backup
+13   7  *  *  * root    fstrim -v /
