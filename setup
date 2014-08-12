@@ -25,7 +25,7 @@ DAEMONS=""
       done
     }
 
-    packages "git vim smartmontools"
+    packages "git vim smartmontools ack-grep"
 
 ## Used for my super awesome aac2ac3 script
 
