@@ -18,7 +18,7 @@ DAEMONS=""
 
     function packages {
       for pkg in $1; do
-        if ! dpkg -s $pkg > /dev/null; then
+        if ! dpkg -s $pkg >/dev/null 2>/dev/null; then
           sudo -E apt-get install -qqy $pkg > /dev/null
           PACKAGES="${PACKAGES}${pkg} "
         fi
