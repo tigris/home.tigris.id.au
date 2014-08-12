@@ -9,6 +9,9 @@ DAEMONS=""
 
 ## Custom sources
 
+    gpg --keyserver pgpkeys.mit.edu --recv-key 07DC563D1F41B907 >/dev/null 2>/dev/null
+    gpg -a --export 07DC563D1F41B907 | sudo apt-key add - >/dev/null
+
     if ! diff -q config/apt/sources.list /etc/apt/sources.list >/dev/null 2>/dev/null; then
       sudo cp config/apt/sources.list /etc/apt/sources.list
       sudo -E apt-get update -qq
