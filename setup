@@ -169,6 +169,8 @@ DAEMONS=""
 
 # Finish up
 
+    sudo update-command-not-found >/dev/null
+
     echo -e "The following packages (and dependencies) were installed:\n    ${PACKAGES:-none}"
     echo -e "The following daemons were restarted (or stopped and started):\n    ${DAEMONS:-none}"
 
