@@ -30,6 +30,10 @@ DAEMONS=""
 
     packages "git vim smartmontools ack-grep command-not-found mdadm hddtemp xfsprogs parted screen zip unzip rar unrar ruby2.1"
 
+## Security
+
+    packages "fail2ban"
+
 ## Used for my super awesome aac2ac3 script
 
     packages "aften faad mediainfo mkvtoolnix ffmpeg"
