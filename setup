@@ -167,6 +167,14 @@ DAEMONS=""
       DAEMONS="${DAEMONS}ddclient "
     fi
 
+## SSH
+
+    if ! diff -q config/ssh/sshd_config /etc/ssh/sshd_config >/dev/null 2>/dev/null; then
+      sudo cp config/ssh/sshd_config /etc/ssh/sshd_config
+      sudo service ssh restart > /dev/null
+      DAEMONS="${DAEMONS}sshd "
+    fi
+
 # Auto Deploy
 
     ln -sf /srv/home.tigris.id.au/config/hooks/post-merge /srv/home.tigris.id.au/.git/hooks/post-merge
