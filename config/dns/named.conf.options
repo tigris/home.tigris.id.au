@@ -2,8 +2,8 @@ options {
   directory "/var/cache/bind";
 
   forwarders {
-    61.9.134.49;
-    61.9.133.193;
+    8.8.8.8;
+    8.8.4.4;
   };
 
   dnssec-validation auto;
