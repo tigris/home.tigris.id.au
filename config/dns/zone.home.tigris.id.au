@@ -2,7 +2,7 @@ $ORIGIN home.tigris.id.au.
 $TTL 1D
 
 @ IN SOA doc hostmaster (
-  201504272
+  201505101
   8H
   4H
   4W
@@ -12,6 +12,7 @@ $TTL 1D
 @ NS doc
 
 localhost  IN A 127.0.0.1
+doc        IN A 192.168.1.2
 biff       IN A 192.168.1.1
 george     IN A 192.168.1.3
 marty      IN A 192.168.1.4
@@ -24,4 +25,3 @@ strickland IN A 192.168.1.10
 clara      IN A 192.168.1.11
 needles    IN A 192.168.1.12
 jennifer   IN A 192.168.1.13
-doc        IN A 192.168.1.202
