@@ -159,7 +159,8 @@ DAEMONS=""
     # Create temp copy of ddclient.conf with password in it
     sudo cp config/ddclient/ddclient.conf ~root/.tmp.ddclient.conf
     sudo chmod 0600 ~root/.tmp.ddclient.conf
-    sudo sed -i -e "s/__PASSWORD__/$(sudo cat ~root/.ddclient)/" ~root/.tmp.ddclient.conf
+    sudo sed -i -e "s/__ROUTER_PASSWORD__/$(sudo cat ~root/.router)/" ~root/.tmp.ddclient.conf
+    sudo sed -i -e "s/__DDNS_PASSWORD__/$(sudo cat ~root/.ddclient)/" ~root/.tmp.ddclient.conf
 
     if ! sudo diff -q ~root/.tmp.ddclient.conf /etc/ddclient.conf >/dev/null 2>/dev/null; then
       sudo cp ~root/.tmp.ddclient.conf /etc/ddclient.conf
