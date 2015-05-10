@@ -140,6 +140,12 @@ DAEMONS=""
       DAEMONS="${DAEMONS}isc-dhcp-server "
     fi
 
+    if ! diff -q config/rsyslog/dhcpd.conf /etc/rsyslog.d/dhcpd.conf >/dev/null 2>/dev/null; then
+      sudo cp config/rsyslog/dhcpd.conf /etc/rsyslog.d/dhcpd.conf
+      sudo service rsyslog restart > /dev/null
+      DAEMONS="${DAEMONS}rsyslog "
+    fi
+
 ## Dynamic DNS
 
     DDNS_CHANGED="0"
